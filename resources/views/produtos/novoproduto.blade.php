@@ -11,13 +11,10 @@
                 <input type="text" class="form-control" name="nome"
                         id="nome" placeholder="Produto">
 
-                <label for="qtde">Qtde</label>
-                <input type="number" class="form-control" name="qtde"
-                        id="qtde" placeholder="Quantidade">
-
                 <label for="preco">Preço</label>
                 <input type="text" class="form-control" name="preco"
                         id="preco" placeholder="Preço do produto">
+
 
             </div>
             <div class="form-group">

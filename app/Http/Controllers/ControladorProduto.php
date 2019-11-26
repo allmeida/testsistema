@@ -9,58 +9,54 @@ use Illuminate\Support\Facades\DB;
 
 class ControladorProduto extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $prod = Produto::all();
         $total = Produto::all()->count();
-        return view('produtos', compact('prod', 'total'));
-        //return view('produtos', ['produtos'=>$produtos]);
-        //return view('produtos')->with (['produtos'=>$produtos]);
+        return view('produtos.produtos', compact('prod', 'total'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         $categorias = Categoria::all();
-        //return view('novoproduto', compact('categorias'));
-        return view('novoproduto', ['categorias'=>$categorias]);
-        //return view('novoproduto')->with (['categorias'=>$categorias]);
-
+        return view('produtos.novoproduto', ['categorias'=>$categorias]);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
 
 
     public function store(Request $request)
     {
-        //dd($request);
+        $pro = Produto::create($request->all());
+        return redirect('/produtos');
+
+
+    }
+
+
+
+
+
+
+    public function storeOld(Request $request)
+    {
+        //dd($request->all());
+        //dd($request->only(['name', 'preco']));
+
+
         $request->validate([
             'nome' => 'required',
-            'qtde' => 'required',
             'preco' => 'required',
             'categoria' => 'required'
         ]);
+
 
         try {
             DB::beginTransaction();
             $pro = new Produto();
             $pro->nome = $request->nome;
-            $pro->qtde = $request->qtde;
             $pro->preco = $request->preco;
+            $pro->categoria = $request->categoria;
 
 
             if(is_array($request->categoria)) {
@@ -76,9 +72,6 @@ class ControladorProduto extends Controller
             DB::rollBack();
             return redirect()->back()->with('error', $e->getMessage() . " " . $e->getFile() . " " . $e->getLine());
         }
-
-
-
     }
 
     /**
@@ -87,6 +80,8 @@ class ControladorProduto extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+
     public function show($id)
     {
         //
@@ -102,7 +97,7 @@ class ControladorProduto extends Controller
     {
         $pro = Produto::find($id);
         if(isset($pro)) {
-            return view('editarproduto', compact('pro'));
+            return view('produtos.editarproduto', compact('pro'));
         }
         return redirect('/produtos');
     }
@@ -117,9 +112,8 @@ class ControladorProduto extends Controller
     public function update(Request $request, $id)
     {
         $pro = Produto::find($id);
-        $pro->nome = $request->input('nome');
-        $pro->qtde = $request->input('qtde');
-        $pro->preco = $request->input('preco');
+        $pro->nome = $request->nome;
+        $pro->preco = $request->preco;
         $pro->save();
 
         return redirect('/produtos');

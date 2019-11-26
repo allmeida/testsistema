@@ -11,12 +11,8 @@
                 <input type="text" class="form-control" name="nome" value="{{$pro->nome}}"
                        id="nome" placeholder="Produto">
 
-                <label for="qtde">Quantidade</label>
-                <input type="" class="form-control" name="qtde" value="{{$pro->qtde}}" 
-                        id="qtde" placeholder="Quantidade">
-
                 <label for="preco">Preço</label>
-                <input type="number" class="form-control" name="preco" value="{{$pro->preco}}" 
+                <input type="number" class="form-control" name="preco" value="{{$pro->preco}}"
                         id="preco" placeholder="Preço">
 
             </div>
