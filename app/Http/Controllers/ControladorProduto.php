@@ -33,43 +33,6 @@ class ControladorProduto extends Controller
 
     }
 
-
-    public function storeOld(Request $request)
-    {
-        //dd($request->all());
-        //dd($request->only(['name', 'preco']));
-
-
-        $request->validate([
-            'nome' => 'required',
-            'preco' => 'required',
-            'categoria' => 'required'
-        ]);
-
-
-        try {
-            DB::beginTransaction();
-            $pro = new Produto();
-            $pro->nome = $request->nome;
-            $pro->preco = $request->preco;
-            $pro->categoria = $request->categoria;
-
-
-            if(is_array($request->categoria)) {
-                foreach ($request->categoria as $c) {
-                    $pro->categoria_id = $c[0];
-                }
-            }
-            $pro->save();
-
-        DB::commit();
-        return redirect()->back()->with('success', "Produto adicionado com sucesso");
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->with('error', $e->getMessage() . " " . $e->getFile() . " " . $e->getLine());
-        }
-    }
-
     /**
      * Display the specified resource.
      *
