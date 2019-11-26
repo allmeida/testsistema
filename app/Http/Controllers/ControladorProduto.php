@@ -34,10 +34,6 @@ class ControladorProduto extends Controller
     }
 
 
-
-
-
-
     public function storeOld(Request $request)
     {
         //dd($request->all());
