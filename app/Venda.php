@@ -8,8 +8,7 @@ class Venda extends Model
 {
     protected $table = 'vendas';
 	protected $dates = ['created_at', 'updated_at'];
-    protected $fillable = ['usuario_id', 'produto_id','numero_venda','vendedor_responsavel','data_venda'];
-
+    protected $fillable = ['venda_id','usuario_id','produto_id','numero_venda','vendedor_responsavel','data_venda','created_at'];
 
     public function produtos()
     {

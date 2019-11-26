@@ -14,7 +14,7 @@
                         Aqui você cadastra todos os seus vendedores.
                     </p>
                     <hr>
-                    <a href="/vendedores" class="btn btn-primary">Cadastre seus vendedores</a>
+                    <a href="/usuarios" class="btn btn-primary">Cadastre seus vendedores</a>
                 </div>
             </div>
             <div class="card bg-light border border-secondary m-25">
