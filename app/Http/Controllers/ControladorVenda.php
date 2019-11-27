@@ -13,12 +13,12 @@ class ControladorVenda extends Controller
 
     public function index()
     {
-        //$vendas = Venda::all();
-        $vendas = Venda::join('produtos', 'vendas.produto_id', '=', 'produtos.id')
-                        ->join('usuarios', 'vendas.usuario_id', '=', 'usuarios.id')
-                        ->select('produtos.nome as nome_produto','usuarios.nome as nome_usuario')
-                        ->get();
-
+        $vendas = Venda::all();
+        /*$vendas = Venda::join('produtos', 'vendas.produto_id', '=', 'produtos.id')
+        *                ->join('usuarios', 'vendas.usuario_id', '=', 'usuarios.id')
+        *                ->select('produtos.nome as nome_produto','usuarios.nome as nome_usuario')
+        *                ->get();
+        */
         return view('vendas.vendas', compact('vendas'));
     }
 
